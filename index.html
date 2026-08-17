@@ -326,6 +326,20 @@ h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif}
 .linkish{background:none;border:0;padding:0;font-family:"Karla",sans-serif;font-size:13.5px;
   color:var(--rose-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 
+.msg .mdp{margin:0 0 10px}
+.msg .mdp:last-child{margin-bottom:0}
+.msg .mdh{display:block;font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:18.5px;
+  margin:16px 0 7px;letter-spacing:-.01em}
+.msg .mdh:first-of-type{margin-top:4px}
+.msg .mdl{margin:0 0 10px;padding-left:0;list-style:none}
+.msg .mdl li{padding-left:22px;margin-bottom:7px;line-height:1.5;
+  background:var(--star) no-repeat 0 6px;background-size:12px 12px}
+.msg .mdl li:last-child{margin-bottom:0}
+.msg .mdbreak{display:block;height:4px}
+.msg code{font-family:"JetBrains Mono",monospace;font-size:14px;background:rgba(158,78,112,.1);
+  padding:1px 5px;border-radius:5px}
+.msg.ai{white-space:normal}
+
 footer{margin-top:48px;border-top:1px solid var(--hair);padding:28px 0 56px}
 footer p{margin:0 0 10px;font-size:14.5px;color:var(--gray);max-width:64ch}
 footer .sig{margin-top:20px;font-family:"Fraunces",Georgia,serif;font-size:17px;
@@ -2146,10 +2160,46 @@ Stay on academics, courses, testing, college planning, and careers. If a student
 
 let chat = [], aiBusy = false, userKey = null, gemModel = null;
 
+/* The advisor replies in Markdown. Escape first (so nothing can inject HTML),
+   then turn the safe markers into real formatting. */
+function mdToHtml(raw){
+  const lines = esc(raw).split("\n");
+  let out = "", inList = false;
+  const inline = t => t
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, "$1<em>$2</em>")
+    .replace(/`([^`]+?)`/g, "<code>$1</code>");
+
+  lines.forEach(line => {
+    const t = line.trim();
+    const head = t.match(/^#{1,6}\s+(.*)$/);
+    const bullet = t.match(/^[-*\u2022]\s+(.*)$/);
+    const numbered = t.match(/^\d+[.)]\s+(.*)$/);
+
+    if(head){
+      if(inList){ out += "</ul>"; inList = false; }
+      out += '<strong class="mdh">' + inline(head[1]) + "</strong>";
+    } else if(bullet || numbered){
+      if(!inList){ out += '<ul class="mdl">'; inList = true; }
+      out += "<li>" + inline((bullet || numbered)[1]) + "</li>";
+    } else if(!t){
+      if(inList){ out += "</ul>"; inList = false; }
+      out += '<span class="mdbreak"></span>';
+    } else {
+      if(inList){ out += "</ul>"; inList = false; }
+      out += "<p class=\"mdp\">" + inline(t) + "</p>";
+    }
+  });
+  if(inList) out += "</ul>";
+  return out;
+}
+
 function bubble(cls, who, text){
   const d = document.createElement("div");
   d.className = "msg " + cls;
-  d.innerHTML = (who ? '<span class="who">' + who + '</span>' : "") + esc(text);
+  const isAdvisor = cls.indexOf("ai") === 0 && cls.indexOf("think") === -1;
+  d.innerHTML = (who ? '<span class="who">' + who + '</span>' : "") +
+                (isAdvisor ? mdToHtml(text) : esc(text));
   $("chatLog").appendChild(d);
   d.scrollIntoView({behavior:"smooth", block:"nearest"});
   return d;
