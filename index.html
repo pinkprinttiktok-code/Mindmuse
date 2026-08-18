@@ -454,6 +454,63 @@ h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif}
 .reslist b{display:block;font-weight:700;color:var(--rose-deep);margin-bottom:4px;font-size:16px}
 .reslist span{display:block;font-size:15px;color:var(--gray);line-height:1.5}
 
+.uploadrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0 4px}
+.uploadbtn{display:inline-block;background:var(--cream);border:2px dashed #E4CDD6;border-radius:100px;
+  padding:13px 22px;font-family:"Karla",sans-serif;font-weight:700;font-size:14.5px;
+  color:var(--rose-deep);cursor:pointer}
+.uploadbtn:hover{border-color:var(--rose);background:#fff}
+.uploadhint{font-size:13.5px;color:var(--gray);flex:1 1 200px;line-height:1.4}
+.tsnote:empty{display:none}
+.tsnote{margin-top:10px}
+.goodnote{color:var(--rose-deep);font-weight:500}
+.warnnote{color:#A8425F}
+
+/* resume builder */
+.ritem{padding:16px;border:1px solid var(--hair);border-radius:18px;
+  background:rgba(255,255,255,.6);margin-bottom:11px}
+.ritem .top{display:flex;gap:8px;margin-bottom:8px}
+.ritem .sels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.ritem input,.ritem textarea{width:100%;min-width:0;padding:12px 14px;border:2px solid var(--hair);
+  border-radius:14px;background:var(--cream);color:var(--ink);
+  font-family:"Karla",sans-serif;font-size:15.5px;line-height:1.5;resize:vertical}
+.ritem input:focus,.ritem textarea:focus{outline:none;border-color:var(--rose);background:#fff}
+.ritem .top input{flex:1}
+.ritem .x{flex:0 0 auto;width:44px;border:1px solid var(--hair);border-radius:14px;
+  background:var(--cream);color:var(--rose-deep);font-size:20px;line-height:1;cursor:pointer}
+.ritem .x:hover{border-color:var(--rose);background:#fff}
+
+.resumepaper{background:#fff;border:1px solid var(--hair);border-radius:20px;
+  padding:36px 32px;box-shadow:0 6px 22px rgba(158,78,112,.07);color:#22212B}
+.rhead{border-bottom:2px solid #E8E4EE;padding-bottom:16px;margin-bottom:20px}
+.rhead h3{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:30px;margin:0 0 6px;
+  letter-spacing:-.02em;color:#22212B}
+.rcontact{margin:0;font-size:14.5px;color:#66626F}
+.rsec{margin-bottom:22px}
+.rsec h4{font-family:"Karla",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--rose-deep);margin:0 0 11px;
+  border-bottom:1px solid #EFEBF2;padding-bottom:6px}
+.rentry{margin-bottom:15px}
+.rentry:last-child{margin-bottom:0}
+.rline{margin:0 0 4px;font-size:15.5px;line-height:1.45}
+.rline b{font-weight:700}
+.rorg{color:#4A4753}
+.rorg::before{content:" \2014 "}
+.rmeta{color:#77737F;font-size:13.5px}
+.rline .rmeta::before{content:"  \00b7  "}
+.rsub{margin:0;font-size:14.5px;color:#4A4753;line-height:1.5}
+.rsec ul{margin:5px 0 0;padding-left:18px}
+.rsec li{font-size:14.5px;line-height:1.5;margin-bottom:3px;color:#3A3844}
+.rempty{margin:0;color:var(--gray);font-style:italic}
+
+@media print{
+  body.printing .nav,body.printing .view:not(#v-resume),body.printing footer,
+  body.printing .sec:not(:last-of-type),body.printing .panels,body.printing .toast{display:none !important}
+  body.printing{background:#fff}
+  body.printing .resumepaper{border:0;box-shadow:none;border-radius:0;padding:0}
+  body.printing .wrap{max-width:none;padding:0}
+  body.printing .eyebrow,body.printing .sec h2{display:none}
+}
+
 footer{margin-top:48px;border-top:1px solid var(--hair);padding:28px 0 56px}
 footer p{margin:0 0 10px;font-size:14.5px;color:var(--gray);max-width:64ch}
 footer .sig{margin-top:20px;font-family:"Fraunces",Georgia,serif;font-size:17px;
@@ -494,6 +551,7 @@ footer .sig{margin-top:20px;font-family:"Fraunces",Georgia,serif;font-size:17px;
       <button type="button" data-go="home">Home</button>
       <button type="button" data-go="pinkprint">Pinkprint</button>
       <button type="button" data-go="transcript">Transcript</button>
+      <button type="button" data-go="resume">Resume</button>
       <button type="button" data-go="tests">SAT &amp; ACT</button>
       <button type="button" data-go="gpa">GPA</button>
       <button type="button" data-go="study">AP Study</button>
@@ -557,6 +615,11 @@ footer .sig{margin-top:20px;font-family:"Fraunces",Georgia,serif;font-size:17px;
         <span class="tag">Exams</span>
         <h3>AP study guide</h3>
         <p>How to study for each AP exam, what it actually tests, when to start, and the mistake that costs students the most points.</p>
+      </button>
+      <button class="hub-card reveal" style="--d:.35s" type="button" data-go="resume">
+        <span class="tag">Applications</span>
+        <h3>Resume builder</h3>
+        <p>For jobs, scholarships and summer programmes. Fill it in once, keep it forever, print it as a PDF when you need it.</p>
       </button>
       <button class="hub-card reveal" style="--d:.4s" type="button" data-go="tools">
         <span class="tag">Tools</span>
@@ -881,6 +944,12 @@ footer .sig{margin-top:20px;font-family:"Fraunces",Georgia,serif;font-size:17px;
           <label for="tsPaste">Your transcript</label>
           <textarea id="tsPaste" rows="9" placeholder="Grade 9&#10;Biology  A&#10;English 9  B+&#10;Geometry  A-&#10;&#10;Grade 10&#10;AP Chemistry  B&#10;Algebra II  A&#10;AP World History  B+"></textarea>
           <p class="hint">One class per line with its grade at the end. Letter grades or numbers both work. Add a line saying "Grade 9" or "Sophomore" to separate years and you'll also get a trajectory read.</p>
+          <div class="uploadrow">
+            <label class="uploadbtn" for="tsFile">Upload a transcript instead</label>
+            <input id="tsFile" type="file" accept=".pdf,.txt,.csv,text/plain" hidden>
+            <span class="uploadhint">PDF or text file. Read on your phone, never uploaded.</span>
+          </div>
+          <p class="hint tsnote" id="tsFileNote"></p>
         </div>
 
         <div class="two">
@@ -931,6 +1000,81 @@ footer .sig{margin-top:20px;font-family:"Fraunces",Georgia,serif;font-size:17px;
           <input id="chatInput" type="text" placeholder="Ask a follow-up&hellip;" autocomplete="off">
           <button class="btn btn-primary" id="chatSend" type="button">Send</button>
         </div>
+      </div>
+    </div>
+    <footer><p class="sig">MindMuse &mdash; Four years, on purpose.</p></footer>
+  </div>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section class="view" id="v-resume">
+  <div class="wrap">
+    <div class="sec">
+      <p class="eyebrow">Applications</p>
+      <h2>Resume builder</h2>
+      <p class="lede">For jobs, scholarships, summer programmes and the activities section of a college application. Fill it in once, keep it forever, print it when you need it.</p>
+
+      <div class="card">
+        <h3 class="toolhead">You</h3>
+        <div class="two">
+          <div class="field"><label for="rName">Full name</label><input id="rName" type="text" placeholder="Your name"></div>
+          <div class="field"><label for="rWhere">City and state</label><input id="rWhere" type="text" placeholder="Middletown, DE"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="rEmail">Email</label><input id="rEmail" type="text" placeholder="you@email.com">
+            <p class="hint">Use a plain one. Not xXgamerXx@.</p></div>
+          <div class="field"><label for="rPhone">Phone (optional)</label><input id="rPhone" type="text" placeholder="Optional"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3 class="toolhead">School</h3>
+        <div class="two">
+          <div class="field"><label for="rSchool">High school</label><input id="rSchool" type="text" placeholder="Your high school"></div>
+          <div class="field"><label for="rGrad">Graduating</label><input id="rGrad" type="text" placeholder="2028"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="rGpa">GPA (optional)</label><input id="rGpa" type="text" placeholder="3.8 unweighted">
+            <p class="hint">Only include it if it helps you.</p></div>
+          <div class="field"><label for="rScores">Test scores (optional)</label><input id="rScores" type="text" placeholder="SAT 1340"></div>
+        </div>
+        <div class="field"><label for="rCourses">Relevant coursework (optional)</label>
+          <input id="rCourses" type="text" placeholder="AP Biology, AP Statistics, Anatomy">
+          <p class="hint">Only the ones related to what you're applying for.</p></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3 class="toolhead">Experience &amp; activities</h3>
+        <p class="toolsub">Jobs, volunteering, clubs, sports, projects, caring for family. All of it counts &mdash; a shift at a restaurant shows more than a club you joined and never attended.</p>
+        <div id="rItems"></div>
+        <div class="btnrow"><button class="btn btn-ghost" id="rAdd" type="button">Add an entry</button></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3 class="toolhead">Skills &amp; awards</h3>
+        <div class="field"><label for="rSkills">Skills</label>
+          <input id="rSkills" type="text" placeholder="Spanish (conversational), Excel, CPR certified">
+          <p class="hint">Concrete and checkable. Not "hard worker".</p></div>
+        <div class="field"><label for="rAwards">Awards and honours</label>
+          <textarea id="rAwards" rows="3" placeholder="Honor roll, 2024–2025&#10;2nd place, regional science fair"></textarea>
+          <p class="hint">One per line.</p></div>
+      </div>
+
+      <div class="btnrow" style="margin-top:18px">
+        <button class="btn btn-primary" id="rPrint" type="button">Print or save as PDF</button>
+      </div>
+      <p class="hint" style="margin-top:12px">Everything here saves to this device automatically. Printing opens your browser's print dialogue &mdash; choose "Save as PDF" to get a file you can attach to an application.</p>
+    </div>
+
+    <div class="sec">
+      <p class="eyebrow">Preview</p>
+      <h2>How it'll look</h2>
+      <div class="resumepaper" id="rPreview"></div>
+    </div>
+
+    <div class="panels">
+      <div class="panel truth wide"><h4>The part nobody tells you</h4>
+        <p>Nobody expects a sixteen-year-old to have a full page. A short honest resume reads better than a padded one, and adults can spot padding instantly. What actually lands is specifics: not "volunteered at the animal shelter" but "walked dogs and cleaned kennels every Saturday for two years." Numbers, months, and what you actually did. If you've held a job, put it first &mdash; showing up for a shift every week says more about you than most club memberships ever will.</p>
       </div>
     </div>
     <footer><p class="sig">MindMuse &mdash; Four years, on purpose.</p></footer>
@@ -2490,7 +2634,7 @@ function watch(scope){
 watch();
 
 /* ---------- routing ---------- */
-const VIEWS = ["home","pinkprint","transcript","tests","gpa","study","tools"];
+const VIEWS = ["home","pinkprint","transcript","resume","tests","gpa","study","tools"];
 function go(name){
   if(!VIEWS.includes(name)) name = "home";
   VIEWS.forEach(v => $("v-"+v).classList.toggle("on", v === name));
@@ -3259,7 +3403,8 @@ function remember(id){
  "curGpa","tgtGpa","doneSem","leftSem",
  "curScore","tgtScore","testDate",
  "examDate","examName",
- "deckPaste"].forEach(remember);
+ "deckPaste",
+ "rName","rWhere","rEmail","rPhone","rSchool","rGrad","rGpa","rScores","rCourses","rSkills","rAwards"].forEach(remember);
 
 /* the schedule builder holds an array, so it saves separately */
 if(SAVED.courses && Array.isArray(SAVED.courses) && SAVED.courses.length){
@@ -3292,6 +3437,182 @@ function clearSaved(){
   SAVED = {};
   toast("Cleared. Refresh to start fresh.");
 }
+
+/* ---------- transcript file upload ---------- */
+/* PDFs are read in the browser and never uploaded. Works on text-based PDFs,
+   which is what school portals produce. A photo or scan of a transcript is an
+   image, not text, so there's nothing to extract — those still need typing. */
+let pdfjsReady = null;
+function loadPdfJs(){
+  if(pdfjsReady) return pdfjsReady;
+  pdfjsReady = new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+    s.onload = () => {
+      try {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        resolve(window.pdfjsLib);
+      } catch(e){ reject(e); }
+    };
+    s.onerror = () => reject(new Error("no pdfjs"));
+    document.head.appendChild(s);
+  });
+  return pdfjsReady;
+}
+
+async function pdfToText(file){
+  const pdfjsLib = await loadPdfJs();
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({data:buf}).promise;
+  const pages = [];
+  for(let i = 1; i <= Math.min(pdf.numPages, 12); i++){
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    // rebuild lines by y-position, since PDFs store loose text fragments
+    const rows = {};
+    content.items.forEach(it => {
+      const y = Math.round(it.transform[5]);
+      (rows[y] = rows[y] || []).push({x: it.transform[4], t: it.str});
+    });
+    Object.keys(rows).sort((a,b) => b - a).forEach(y => {
+      const line = rows[y].sort((a,b) => a.x - b.x).map(o => o.t).join(" ")
+        .replace(/\s+/g," ").trim();
+      if(line) pages.push(line);
+    });
+  }
+  return pages.join("\n");
+}
+
+$("tsFile").addEventListener("change", async e => {
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  const note = $("tsFileNote");
+  note.className = "hint tsnote";
+  note.textContent = "Reading " + file.name + "\u2026";
+
+  try {
+    let text = "";
+    if(/\.pdf$/i.test(file.name)){
+      text = await pdfToText(file);
+    } else {
+      text = await file.text();
+    }
+    if(!text.trim()){
+      note.className = "hint tsnote warnnote";
+      note.textContent = "Nothing readable came out of that file. If it's a scan or a photo, the text is an image and can't be extracted \u2014 you'd need to type it in.";
+      return;
+    }
+    $("tsPaste").value = text.trim();
+    SAVED.tsPaste = $("tsPaste").value; queueSave();
+    const found = parseTranscript(text).length;
+    note.className = "hint tsnote " + (found ? "goodnote" : "warnnote");
+    note.textContent = found
+      ? "Read " + found + " class" + (found===1?"":"es") + " from that file. Check the box above and fix anything that came out wrong \u2014 transcripts are laid out oddly and it won't be perfect."
+      : "The file was read but no classes were recognised. Tidy the text above so each line is a class name followed by its grade, then run the review.";
+    $("tsPaste").scrollIntoView({behavior:"smooth", block:"center"});
+  } catch(err) {
+    note.className = "hint tsnote warnnote";
+    note.textContent = "Couldn't read that file. PDFs and plain text work; images and scans don't. You can still type or paste your classes above.";
+  }
+  e.target.value = "";
+});
+
+/* ---------- resume builder ---------- */
+let rItems = [];
+
+function renderRItems(){
+  $("rItems").innerHTML = rItems.map((it,i) =>
+    '<div class="ritem" data-i="' + i + '">' +
+      '<div class="top">' +
+        '<input type="text" data-k="role" placeholder="What you did \u2014 e.g. Crew member, Team captain" value="' + esc(it.role) + '">' +
+        '<button class="x" type="button" data-k="del" aria-label="Remove entry">&times;</button>' +
+      '</div>' +
+      '<div class="sels">' +
+        '<input type="text" data-k="org" placeholder="Where \u2014 e.g. Chick-fil-A, school" value="' + esc(it.org) + '">' +
+        '<input type="text" data-k="when" placeholder="When \u2014 e.g. Jun 2025 \u2013 present" value="' + esc(it.when) + '">' +
+      '</div>' +
+      '<textarea data-k="bullets" rows="3" placeholder="One line per point. What you actually did, with numbers where you have them.">' + esc(it.bullets) + '</textarea>' +
+    '</div>').join("");
+}
+
+$("rAdd").addEventListener("click", () => {
+  rItems.push({role:"", org:"", when:"", bullets:""});
+  renderRItems(); saveResume();
+});
+$("rItems").addEventListener("input", e => {
+  const row = e.target.closest(".ritem"); if(!row) return;
+  const i = +row.dataset.i, k = e.target.dataset.k;
+  if(k && k !== "del"){ rItems[i][k] = e.target.value; renderResume(); saveResume(); }
+});
+$("rItems").addEventListener("click", e => {
+  const b = e.target.closest('[data-k="del"]'); if(!b) return;
+  rItems.splice(+b.closest(".ritem").dataset.i, 1);
+  renderRItems(); renderResume(); saveResume();
+});
+
+const R_FIELDS = ["rName","rWhere","rEmail","rPhone","rSchool","rGrad","rGpa","rScores","rCourses","rSkills","rAwards"];
+function saveResume(){ SAVED.rItems = rItems; queueSave(); }
+
+function renderResume(){
+  const v = id => ($(id).value || "").trim();
+  const name = v("rName") || "Your name";
+  const contact = [v("rWhere"), v("rEmail"), v("rPhone")].filter(Boolean).join("  \u00b7  ");
+
+  let html = '<div class="rhead"><h3>' + esc(name) + '</h3>' +
+    (contact ? '<p class="rcontact">' + esc(contact) + '</p>' : '') + '</div>';
+
+  const schoolBits = [];
+  if(v("rGrad")) schoolBits.push("Class of " + v("rGrad"));
+  if(v("rGpa")) schoolBits.push("GPA " + v("rGpa"));
+  if(v("rScores")) schoolBits.push(v("rScores"));
+  if(v("rSchool") || schoolBits.length || v("rCourses")){
+    html += '<div class="rsec"><h4>Education</h4>' +
+      (v("rSchool") ? '<p class="rline"><b>' + esc(v("rSchool")) + '</b>' +
+        (schoolBits.length ? '<span class="rmeta">' + esc(schoolBits.join("  \u00b7  ")) + '</span>' : '') + '</p>'
+        : (schoolBits.length ? '<p class="rline"><span class="rmeta">' + esc(schoolBits.join("  \u00b7  ")) + '</span></p>' : '')) +
+      (v("rCourses") ? '<p class="rsub">Relevant coursework: ' + esc(v("rCourses")) + '</p>' : '') +
+      '</div>';
+  }
+
+  const live = rItems.filter(it => it.role || it.org || it.bullets);
+  if(live.length){
+    html += '<div class="rsec"><h4>Experience &amp; activities</h4>' + live.map(it => {
+      const bullets = (it.bullets || "").split("\n").map(b => b.trim()).filter(Boolean);
+      return '<div class="rentry">' +
+        '<p class="rline"><b>' + esc(it.role || "\u2014") + '</b>' +
+          (it.org ? '<span class="rorg">' + esc(it.org) + '</span>' : '') +
+          (it.when ? '<span class="rmeta">' + esc(it.when) + '</span>' : '') + '</p>' +
+        (bullets.length ? '<ul>' + bullets.map(b => '<li>' + esc(b) + '</li>').join("") + '</ul>' : '') +
+      '</div>';
+    }).join("") + '</div>';
+  }
+
+  if(v("rSkills")){
+    html += '<div class="rsec"><h4>Skills</h4><p class="rsub">' + esc(v("rSkills")) + '</p></div>';
+  }
+  const awards = v("rAwards").split("\n").map(a => a.trim()).filter(Boolean);
+  if(awards.length){
+    html += '<div class="rsec"><h4>Awards</h4><ul class="rawards">' +
+      awards.map(a => '<li>' + esc(a) + '</li>').join("") + '</ul></div>';
+  }
+
+  if(!live.length && !awards.length && !v("rSchool")){
+    html += '<p class="rempty">Fill in the fields above and this fills itself in.</p>';
+  }
+  $("rPreview").innerHTML = html;
+}
+
+R_FIELDS.forEach(id => { $(id).addEventListener("input", renderResume); });
+if(Array.isArray(SAVED.rItems)) rItems = SAVED.rItems;
+if(!rItems.length) rItems = [{role:"", org:"", when:"", bullets:""}];
+renderRItems(); renderResume();
+
+$("rPrint").addEventListener("click", () => {
+  document.body.classList.add("printing");
+  window.print();
+  setTimeout(() => document.body.classList.remove("printing"), 400);
+});
 
 /* ---------- AI advisor ---------- */
 const AI_ENDPOINTS = ["/api/advise", "/.netlify/functions/advise"];  // Cloudflare, then Netlify
